@@ -26,7 +26,7 @@ img{
     z-index: 9999;
 }
 .loader-container.hidden{
-    animation: fadeOut;
+    animation: fadeOut 1s;
     animation-fill-mode: forwards;
 }
 .loader, .loader:before, .loader:after {
@@ -63,6 +63,9 @@ img{
     40% { box-shadow: 0 2.5em 0 0 }
 }
 @keyframes fadeOut{
+    50%{
+        opacity: 0.2;
+    }
     100%{
         opacity: 0;
         display: none;
