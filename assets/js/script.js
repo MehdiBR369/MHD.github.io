@@ -44,7 +44,6 @@ function previousMusic(){
 function playMusic(){
   if(!isPlaying){
     isPlaying = true;
-    audio.src = musics[musicIndex].link;
     audio.play();
     play_btn.className = 'fa-solid fa-pause play-pause';
 
