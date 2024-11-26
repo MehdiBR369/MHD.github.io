@@ -34,7 +34,8 @@ function reapetMusic(){
 function previousMusic(){
   musicIndex--;
   if(musicIndex < 0){
-    musicIndex = musics.lenght-1;
+    musicIndex = 0;
+    console.log(musicIndex);
   }
   audio.src = musics[musicIndex].link;
   isPlaying = false;
