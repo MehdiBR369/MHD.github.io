@@ -3,18 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MHD.com</title>
+    <title>JavaScript Music PLayer</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/a7e9f543c6.js" crossorigin="anonymous"></script>
+    <!-- google font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_upward" />
 </head>
 <body>
-    <img src="https://cdn.prod.website-files.com/5fd48c67bfe96103e696a791/625474b0121d854546d5e419_Garena-Free-Fire.jpeg" alt="">
-
-
-    
+    <div class="container">
+        <div class="album-pic">
+            <div class="img-holder">
+                <img src="assets/img/Wireless-Headphones-PNG-Free-Download.png">
+            </div>
+        </div>
+        <div class="title">
+            <h1 class="singer-name">Example</h1>
+            <h3 class="music-name">Example</h3>
+        </div>
+        <div class="details">
+            <div class="tracker">
+                <input type="range" id="slider">
+            </div>
+            <div class="timer">
+                <span class="time-goes">00:00</span>
+                <span class="time-duration">00:00</span>
+            </div>
+            <div class="btns">
+                <i class="fa-solid fa-repeat repeat"></i>
+                <i class="fa-solid fa-backward backward"></i>
+                <i class="fa-solid fa-play play-pause"></i>
+                <i class="fa-solid fa-forward forward"></i>
+                <i class="fa-solid fa-volume-xmark mute"></i>
+            </div>
+        </div>
+        <audio></audio>
+    </div>
     <div class="loader-container">
         <div class="loader"></div>
     </div>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/loader.js"></script>
 </body>
 </html>
