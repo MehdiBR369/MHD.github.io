@@ -85,4 +85,5 @@ function muteMusic(){
 play_btn.addEventListener('click', playMusic);
 repeat_btn.addEventListener('click', reapetMusic);
 forward_btn.addEventListener('click', nextMusic);
-mute_btn.addEventListener('click', muteMusic)
+mute_btn.addEventListener('click', muteMusic);
+backward_btn.addEventListener('click', previousMusic);
