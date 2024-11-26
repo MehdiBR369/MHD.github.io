@@ -47,6 +47,7 @@ function playMusic(){
     isPlaying = true;
     audio.play();
     play_btn.className = 'fa-solid fa-pause play-pause';
+    audio.currentTime = audio.currentTime;
 
     setTimeout(function(){
       time_duration.innerHTML = `${Math.floor(audio.duration / 60)}:00`;
