@@ -38,7 +38,7 @@ function previousMusic(){
 function playMusic(){
   if(!isPlaying){
     isPlaying = true;
-    audio.src = musics[musicIndex].link;
+    audio.src = musics[0].link;
     audio.play();
     play_btn.className = 'fa-solid fa-pause play-pause';
 
@@ -51,12 +51,20 @@ function playMusic(){
   }else{
     isPlaying = false;
     audio.pause();
+    audio.currentTime = audio.currentTime;
     play_btn.className = 'fa-solid fa-play play-pause';
   }
 }
 
 function nextMusic(){
-  
+  musicIndex++;
+  if(musicIndex > musics.length - 1){
+    musicIndex = 0;
+  }
+  audio.src = musics[musicIndex].link;
+  isPlaying = false;
+  playMusic();
+  console.log(musicIndex);
 }
 
 function muteMusic(){
