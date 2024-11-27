@@ -116,6 +116,8 @@ audio.addEventListener('ended', function(){
     }
     audio.src = musics[musicIndex].link;
     isPlaying = false;
+    music_title.innerHTML = musics[musicIndex].musicName;
+    singer_name.innerHTML = musics[musicIndex].singer;
     playMusic();
     console.log(musicIndex);
   }else{
