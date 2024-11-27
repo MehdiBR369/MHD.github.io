@@ -65,10 +65,6 @@ function playMusic(){
       time_duration.innerHTML = `${minutofMusic}:${secondofMusic}`;
       slider.max = audio.duration;
     }, 500)
-    setInterval(function(){
-      slider.value = audio.currentTime;
-      time_goese.innerHTML = `${Math.floor(audio.currentTime)}`; 
-    }, 1000)
   }else{
     isPlaying = false;
     audio.pause();
@@ -93,9 +89,11 @@ function muteMusic(){
   if(!audio.muted){
     audio.muted = true;
     mute_btn.style.color = '#0077B6';
+    mute_btn.className = 'fa-solid fa-volume-xmark mute';
   }else{
     audio.muted = false;
     mute_btn.style.color = '#6C757D';
+    mute_btn.className = 'fa-solid fa-volume-high mute';
   }
 }
 
@@ -124,5 +122,9 @@ audio.addEventListener('ended', function(){
     playMusic();
   }
 });
-
-console.log(59%60);
+audio.addEventListener('play', function(){
+  setInterval(function(){
+    slider.value = audio.currentTime;
+    time_goese.innerHTML = `${Math.floor(audio.currentTime)}`;
+  }, 1000)
+});
