@@ -128,7 +128,8 @@ body{
     align-items: center;
     justify-content: center;
     cursor: pointer;
-
+    width: 50px !important;
+    height: 50px !important;
 }
 .btns .repeat{
     color: #6C757D;
@@ -141,13 +142,9 @@ body{
     font-size: 24px;
 }
 .btns .play-pause{
-    width: 70px;
-    height: 65px;
     color: #0077B6;
     border-radius: 50%;
     font-size: 28px;
-    background-color: #0077B6;
-    color: #212529;
 }
 
 
