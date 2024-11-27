@@ -38,6 +38,7 @@ body{
     height: 200px;
     border: 2px solid #F0EBD8;
     border-radius: 50%;
+    animation: rotateAnim 4.5s linear infinite;
 
     display: flex;
     align-items: center;
@@ -122,11 +123,12 @@ body{
     gap: 25px;
 }
 .details .btns i{
-    padding: 5px;
+    padding: 5px 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
 }
 .btns .repeat{
     color: #6C757D;
@@ -139,9 +141,23 @@ body{
     font-size: 24px;
 }
 .btns .play-pause{
+    width: 70px;
+    height: 65px;
     color: #0077B6;
     border-radius: 50%;
     font-size: 28px;
+    background-color: #0077B6;
+    color: #212529;
+}
+
+
+@keyframes rotateAnim{
+    0%{
+        transform: rotate(0deg);
+       }
+    100%{
+        transform: rotate(360deg);
+       }
 }
 
 
@@ -151,6 +167,7 @@ body{
         height: 100vh;
         border-radius: 0;
         box-shadow: none;
+        gap: 25px;
     }
     .loader-container{
         width: 100%;

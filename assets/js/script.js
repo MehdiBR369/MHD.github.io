@@ -67,7 +67,7 @@ function playMusic(){
     }, 500)
     setInterval(function(){
       slider.value = audio.currentTime;
-      time_goese.innerHTML = `${audio.duration}`; 
+      time_goese.innerHTML = `${Math.floor(audio.currentTime)}`; 
     }, 1000)
   }else{
     isPlaying = false;
