@@ -1,6 +1,8 @@
 let $ = document;
 
 let audio = $.querySelector('audio');
+let music_title = $.querySelector('.music-name');
+let singer_name = $.querySelector('.singer-name');
 let repeat_btn = $.querySelector('.repeat');
 let backward_btn = $.querySelector('.backward');
 let play_btn = $.querySelector('.play-pause');
@@ -11,14 +13,18 @@ let time_goese = $.querySelector('.time-goes');
 let time_duration = $.querySelector('.time-duration');
 
 let isPlaying = false;
+let minutofMusic = 0;
+let secondofMusic = 0;
+
+
 
 let musics = [
-  {musicName:'Koo Ta Biad', singer:'Donya', link:'assets/audio/Donya - Koo Ta Biad.mp3'},
-  {musicName:'Sheta', singer:'Kamal-Golchin', link:'assets/audio/Kamal-Golchin-Sheta.mp3'},
-  {musicName:'Chika Chika', singer:'Nikita', link:'assets/audio/Nikita - Chika Chika.mp3'},
-  {musicName:'relaxing guitar', singer:'unknown', link:'assets/audio/relaxing-guitar-loop-v5-245859.mp3'},
+  {id: 1,musicName:'Koo Ta Biad', singer:'Donya', link:'assets/audio/Donya - Koo Ta Biad.mp3'},
+  {id: 2,musicName:'Sheta', singer:'Kamal-Golchin', link:'assets/audio/Kamal-Golchin-Sheta.mp3'},
+  {id: 3,musicName:'Chika Chika', singer:'Nikita', link:'assets/audio/Nikita - Chika Chika.mp3'},
+  {id: 4,musicName:'relaxing guitar', singer:'unknown', link:'assets/audio/relaxing-guitar-loop-v5-245859.mp3'},
 ];
-let musicIndex = 0;
+let musicIndex = 2;
 
 
 function reapetMusic(){
@@ -32,21 +38,35 @@ function reapetMusic(){
 }
 
 function previousMusic(){
-  
+  musicIndex--;
+  if(musicIndex < 0){
+    musicIndex = musics.length - 1;
+  }
+  audio.src = musics[musicIndex].link;
+  isPlaying = false;
+  music_title.innerHTML = musics[musicIndex].musicName;
+  singer_name.innerHTML = musics[musicIndex].singer;
+  playMusic();
+  console.log(musicIndex);
 }
 
 function playMusic(){
   if(!isPlaying){
+
     isPlaying = true;
-    audio.src = musics[0].link;
-    audio.play();
     play_btn.className = 'fa-solid fa-pause play-pause';
 
     setTimeout(function(){
-      time_duration.innerHTML = `${Math.floor(audio.duration / 60)}:00`;
+      audio.play();
+
+      minutofMusic = Math.floor(audio.duration / 60);
+      secondofMusic = Math.floor(audio.duration % 60);
+      time_duration.innerHTML = `${minutofMusic}:${secondofMusic}`;
+      slider.max = audio.duration;
     }, 500)
     setInterval(function(){
-      time_goese.innerHTML = `00:${Math.floor(audio.currentTime)}`
+      slider.value = audio.currentTime;
+      time_goese.innerHTML = `${audio.duration}`; 
     }, 1000)
   }else{
     isPlaying = false;
@@ -63,6 +83,8 @@ function nextMusic(){
   }
   audio.src = musics[musicIndex].link;
   isPlaying = false;
+  music_title.innerHTML = musics[musicIndex].musicName;
+  singer_name.innerHTML = musics[musicIndex].singer;
   playMusic();
   console.log(musicIndex);
 }
@@ -81,4 +103,24 @@ function muteMusic(){
 play_btn.addEventListener('click', playMusic);
 repeat_btn.addEventListener('click', reapetMusic);
 forward_btn.addEventListener('click', nextMusic);
-mute_btn.addEventListener('click', muteMusic)
+mute_btn.addEventListener('click', muteMusic);
+backward_btn.addEventListener('click', previousMusic);
+slider.addEventListener('click', function(){
+    audio.currentTime = slider.value;
+});
+audio.addEventListener('ended', function(){
+  if(!audio.loop){
+    musicIndex++;
+    if(musicIndex > musics.length - 1){
+      musicIndex = 0;
+    }
+    audio.src = musics[musicIndex].link;
+    isPlaying = false;
+    playMusic();
+    console.log(musicIndex);
+  }else{
+    playMusic();
+  }
+});
+
+console.log(59%60);
