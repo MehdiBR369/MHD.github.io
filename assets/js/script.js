@@ -55,6 +55,7 @@ function playMusic(){
 
     isPlaying = true;
     play_btn.className = 'fa-solid fa-pause play-pause';
+    audio.currentTime = audio.currentTime;
 
     setTimeout(function(){
       audio.play();
@@ -86,7 +87,6 @@ function nextMusic(){
   music_title.innerHTML = musics[musicIndex].musicName;
   singer_name.innerHTML = musics[musicIndex].singer;
   playMusic();
-  console.log(musicIndex);
 }
 
 function muteMusic(){
