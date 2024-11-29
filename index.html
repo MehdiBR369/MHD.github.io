@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Music PLayer</title>
+    <title>Mehdi MusicPlayer</title>
+    <link rel="shortcut icon" href="assets/img/symbol-music-note-red-musical-zeeGmeA-600.jpg" type="image/x-icon">
 
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/loader.css">
 
-    <!-- font awesome -->
     <script src="https://kit.fontawesome.com/a7e9f543c6.js" crossorigin="anonymous"></script>
-    <!-- google font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_upward" />
+
 </head>
 <body>
-    <div class="container">
-        <div class="album-pic">
-            <div class="img-holder">
-                <img src="assets/img/Wireless-Headphones-PNG-Free-Download.png">
+
+    
+    <div class="bg-container">
+        <img src="" alt="" id="background">
+    </div>
+    <div class="player-container">
+        <!-- Song -->
+        <div class="img-container">
+            <img src="" alt="" id="cover" class="active">
+        </div>
+        <h2 id="title"></h2>
+        <h3 id="artist"></h3>
+        <audio src=""></audio>
+        <!-- Progress -->
+        <div class="progress-container" id="progress-container">
+            <div class="progress" id="progress"></div>
+            <div class="duration-wrapper">
+                <span id="current-time"></span>
+                <span id="duration"></span>
             </div>
         </div>
-        <div class="title">
-            <h1 class="singer-name">Nikita</h1>
-            <h3 class="music-name">Chika Chika</h3>
+        <!-- Controls -->
+        <div class="player-controls">
+            <i class="fas fa-backward" id="prev" title="Previous"></i>
+            <i class="fas fa-play main-button" id="play" title="Play"></i>
+            <i class="fas fa-forward" id="next" title="Next"></i>
         </div>
-        <div class="details">
-            <div class="tracker">
-                <input type="range" id="slider" min="0" value="0">
-            </div>
-            <div class="timer">
-                <span class="time-goes">00:00</span>
-                <span class="time-duration">00:00</span>
-            </div>
-            <div class="btns">
-                <i class="fa-solid fa-repeat repeat"></i>
-                <i class="fa-solid fa-backward backward"></i>
-                <i class="fa-solid fa-play play-pause"></i>
-                <i class="fa-solid fa-forward forward"></i>
-                <i class="fa-solid fa-volume-high mute"></i>
-            </div>
-        </div>
-        <audio src="assets/audio/Nikita - Chika Chika.mp3"></audio>
     </div>
     <div class="loader-container">
         <div class="loader"></div>
     </div>
+
     <script src="assets/js/script.js"></script>
     <script src="assets/js/loader.js"></script>
 </body>

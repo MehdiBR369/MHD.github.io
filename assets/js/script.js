@@ -1,130 +1,159 @@
 let $ = document;
 
-let audio = $.querySelector('audio');
-let music_title = $.querySelector('.music-name');
-let singer_name = $.querySelector('.singer-name');
-let repeat_btn = $.querySelector('.repeat');
-let backward_btn = $.querySelector('.backward');
-let play_btn = $.querySelector('.play-pause');
-let forward_btn = $.querySelector('.forward');
-let mute_btn = $.querySelector('.mute');
-let slider = $.querySelector('#slider');
-let time_goese = $.querySelector('.time-goes');
-let time_duration = $.querySelector('.time-duration');
+const image = $.querySelector('#cover');
+const title = $.querySelector('#title');
+const artist = $.querySelector('#artist');
+const audio = $.querySelector('audio');
+const progress_container = $.querySelector('.progress-container');
+const progress = $.querySelector('.progress');
+const currentTimeEl = $.querySelector('#current-time');
+const durationEl = $.querySelector('#duration');
+const prev_btn = $.querySelector('#prev');
+const play_btn = $.querySelector('#play');
+const next_btn = $.querySelector('#next');
+const background = $.querySelector('#background');
+
+
+let songs = [
+    {
+        title: 'Boom Boom',
+        artist: 'Nikita & Shery',
+        path: 'assets/audio/Nikita & Shery - Boom Boom.mp3',
+        cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd8n8obMXqMcoZkyFPbbmlj0Vn0uCeeZTmkQ&s',
+    },
+    {
+        title: 'Chetori Gol',
+        artist: 'Tohi',
+        path: 'assets/audio/Tohi - Chetori Gol 128.mp3',
+        cover: '',
+    },
+    {
+        title: '6 Saat Baad',
+        artist: 'Nikita & Shery',
+        path: 'assets/audio/Nikita & Shery M - 6 Saat Baad (320).mp3',
+        cover: '',
+    },
+    {
+        title: 'Delom',
+        artist: 'Nikita & Shery',
+        path: 'assets/audio/Nikita - Delom ft SheryM (320).mp3',
+        cover:'' ,
+    },
+    {
+        title: 'Ma Yekim To Chi',
+        artist: 'EpiCure',
+        path: 'assets/audio/EpiCure - Ma Yekim To Chi [128].mp3',
+        cover: '',
+    },
+    {
+        title: 'Chika Chika',
+        artist: 'Nikita',
+        path: 'assets/audio/Nikita - Chika Chika.mp3',
+        cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwHOlSB6AM4oUWDWhFby-kyGyNdYK9uOGE9w&s',
+    },
+];
 
 let isPlaying = false;
-let minutofMusic = 0;
-let secondofMusic = 0;
 
+let musicIndex = 0;
 
-
-let musics = [
-  {id: 1,musicName:'Koo Ta Biad', singer:'Donya', link:'assets/audio/Donya - Koo Ta Biad.mp3'},
-  {id: 2,musicName:'Sheta', singer:'Kamal-Golchin', link:'assets/audio/Kamal-Golchin-Sheta.mp3'},
-  {id: 3,musicName:'Chika Chika', singer:'Nikita', link:'assets/audio/Nikita - Chika Chika.mp3'},
-  {id: 4,musicName:'relaxing guitar', singer:'unknown', link:'assets/audio/relaxing-guitar-loop-v5-245859.mp3'},
-];
-let musicIndex = 2;
-
-
-function reapetMusic(){
-  if(!audio.loop){
-    audio.loop = true;
-    repeat_btn.style.color = '#0077B6';
-  }else{
-    audio.loop = false;
-    repeat_btn.style.color = '#6C757D';
-  }
-}
-
-function previousMusic(){
-  musicIndex--;
-  if(musicIndex < 0){
-    musicIndex = musics.length - 1;
-  }
-  audio.src = musics[musicIndex].link;
-  isPlaying = false;
-  music_title.innerHTML = musics[musicIndex].musicName;
-  singer_name.innerHTML = musics[musicIndex].singer;
-  playMusic();
-  console.log(musicIndex);
-}
 
 function playMusic(){
-  if(!isPlaying){
-
     isPlaying = true;
-    play_btn.className = 'fa-solid fa-pause play-pause';
-    audio.currentTime = audio.currentTime;
-
-    setTimeout(function(){
-      audio.play();
-
-      minutofMusic = Math.floor(audio.duration / 60);
-      secondofMusic = Math.floor(audio.duration % 60);
-      time_duration.innerHTML = `${minutofMusic}:${secondofMusic}`;
-      slider.max = audio.duration;
-    }, 500)
-  }else{
-    isPlaying = false;
-    audio.pause();
-    audio.currentTime = audio.currentTime;
-    play_btn.className = 'fa-solid fa-play play-pause';
-  }
+    play_btn.classList.replace('fa-play', 'fa-pause');
+    audio.play();
 }
+function pauseMusic(){
+    isPlaying = false;
+    play_btn.classList.replace('fa-pause', 'fa-play');
+    audio.pause();
+}
+play_btn.addEventListener('click', function(){
+    if(isPlaying){
+        pauseMusic();
+    }else{
+        playMusic();
+    }
+});
 
 function nextMusic(){
-  musicIndex++;
-  if(musicIndex > musics.length - 1){
-    musicIndex = 0;
-  }
-  audio.src = musics[musicIndex].link;
-  isPlaying = false;
-  music_title.innerHTML = musics[musicIndex].musicName;
-  singer_name.innerHTML = musics[musicIndex].singer;
-  playMusic();
-}
-
-function muteMusic(){
-  if(!audio.muted){
-    audio.muted = true;
-    mute_btn.style.color = '#0077B6';
-    mute_btn.className = 'fa-solid fa-volume-xmark mute';
-  }else{
-    audio.muted = false;
-    mute_btn.style.color = '#6C757D';
-    mute_btn.className = 'fa-solid fa-volume-high mute';
-  }
-}
-
-
-play_btn.addEventListener('click', playMusic);
-repeat_btn.addEventListener('click', reapetMusic);
-forward_btn.addEventListener('click', nextMusic);
-mute_btn.addEventListener('click', muteMusic);
-backward_btn.addEventListener('click', previousMusic);
-slider.addEventListener('click', function(){
-    audio.currentTime = slider.value;
-});
-audio.addEventListener('ended', function(){
-  if(!audio.loop){
     musicIndex++;
-    if(musicIndex > musics.length - 1){
-      musicIndex = 0;
+    if(musicIndex > songs.length - 1){
+        musicIndex = 0;
     }
-    audio.src = musics[musicIndex].link;
-    isPlaying = false;
-    music_title.innerHTML = musics[musicIndex].musicName;
-    singer_name.innerHTML = musics[musicIndex].singer;
+    loadMusic(songs[musicIndex]);
     playMusic();
-    console.log(musicIndex);
-  }else{
+}
+function prevMusic(){
+    musicIndex--;
+    if(musicIndex < 0){
+        musicIndex = songs.length - 1;
+    }
+    loadMusic(songs[musicIndex]);
     playMusic();
-  }
-});
-audio.addEventListener('play', function(){
-  setInterval(function(){
-    slider.value = audio.currentTime;
-    time_goese.innerHTML = `${Math.floor(audio.currentTime)}`;
-  }, 1000)
-});
+}
+
+
+
+
+function loadMusic(song){
+    console.log(song);
+    title.textContent = song.title;
+    artist.textContent = song.artist;
+    audio.src = song.path;
+    changeCover(song.cover)
+}
+function changeCover(cover){
+    image.classList.remove('active');
+    setTimeout(function(){
+        if(cover === '' || cover === undefined){
+            image.src = 'assets/img/symbol-music-note-red-musical-zeeGmeA-600.jpg';
+        }else{
+            image.src = cover;
+        }
+        image.classList.add('active');
+    }, 100);
+    background.src = cover;
+}
+
+loadMusic(songs[musicIndex]);
+
+
+function updateProgressBar(e){
+    if(isPlaying){
+        const duration = e.target.duration;
+        const currentTime = e.target.currentTime;
+
+        const progressWidth = (currentTime / duration) * 100;
+        progress.style.width = `${progressWidth}%`;
+
+        const durationMinuts = Math.floor(duration / 60);
+        let durationSeconds = Math.floor(duration) % 60;
+        if(durationSeconds < '10'){
+            durationSeconds = `0${durationSeconds}`;
+        }
+        if(durationSeconds){
+            durationEl.textContent = `${durationMinuts}:${durationSeconds}`;
+        }
+
+        const currentMinutes = Math.floor(currentTime / 60);
+        let currentSeconds = Math.floor(currentTime % 60);
+        if(currentSeconds < '10'){
+            currentSeconds = `0${currentSeconds}`;
+        }
+        currentTimeEl.textContent = `${currentMinutes}:${currentSeconds}`;
+    }
+}
+
+function setProgressBar(e){
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const duration = audio.duration;
+    audio.currentTime = (clickX / width) * duration;
+}
+
+
+next_btn.addEventListener('click', nextMusic);
+prev_btn.addEventListener('click', prevMusic);
+audio.addEventListener('timeupdate', updateProgressBar);
+progress_container.addEventListener('click', setProgressBar)
