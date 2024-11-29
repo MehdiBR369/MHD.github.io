@@ -113,7 +113,11 @@ function changeCover(cover){
         }
         image.classList.add('active');
     }, 100);
-    background.src = cover;
+    if(cover === '' || cover === undefined){
+        background.src = 'assets/img/symbol-music-note-red-musical-zeeGmeA-600.jpg';
+    }else{
+        background.src = cover;
+    }
 }
 
 loadMusic(songs[musicIndex]);
